@@ -39,7 +39,6 @@ public class JobController {
             return new ResponseEntity<>(job, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
 
 }
