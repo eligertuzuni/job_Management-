@@ -1,8 +1,8 @@
 package com.management.firstjobapp.company;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,10 +16,19 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-
     @GetMapping
-    public List<Company> getAllCompanies() {
-        return companyService.getAllCompanies();
+    public  ResponseEntity<List<Company>> getAllCompanies() {
+        return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCompanies(@PathVariable Long id, @RequestBody Company company) {
+        companyService.updateCompany(company, id);
+        return new ResponseEntity<>("Company updated successfully", HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> addCompany(@RequestBody Company company) {
+        companyService.createCompany(company);
+        return new ResponseEntity<>("Company added successfuly", HttpStatus.CREATED);
+    }
 }
