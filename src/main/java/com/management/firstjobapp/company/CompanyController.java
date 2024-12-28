@@ -31,13 +31,23 @@ public class CompanyController {
         companyService.createCompany(company);
         return new ResponseEntity<>("Company added successfuly", HttpStatus.CREATED);
     }
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable Long id) {
         boolean isDeleted = companyService.deleteCompanyById(id);
         if(isDeleted) {
             return new ResponseEntity<>("Company successully deleted", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Company not found", HttpStatus.OK);
+            return new ResponseEntity<>("Company not found", HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    public ResponseEntity<Company> getCompany(@PathVariable Long id) {
+        Company company =companyService.getCompanyById(id);
+        if(company != null) {
+                return new ResponseEntity<>(company, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
