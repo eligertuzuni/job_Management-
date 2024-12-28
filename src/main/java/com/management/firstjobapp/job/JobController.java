@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 // here we create an end-point to find all the posted jobs using an arrayList
 @RestController
+@RequestMapping("/jobs")
 public class JobController {
 
     // since we do not have a database we create an array list and moving to JobServiceImpl
@@ -18,13 +19,15 @@ public class JobController {
         this.jobService = jobService;
     }
 
-    @GetMapping("/jobs")
+//    @GetMapping("/jobs")
+    @GetMapping
     public ResponseEntity<List<Job> > findAll() {
         return ResponseEntity.ok(jobService.findAll());
     }
 
     // on the same end-point we will post jobs using PostMapping
-    @PostMapping("/jobs")
+//    @PostMapping("/jobs")
+    @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
         return new ResponseEntity<>( "Job added sucessully",HttpStatus.OK);
@@ -32,7 +35,8 @@ public class JobController {
     }
 
     // implementing getting the job by ID and adding to the url
-    @GetMapping("/jobs/{id}")
+//    @GetMapping("/jobs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
         if(job != null) {
@@ -42,7 +46,8 @@ public class JobController {
     }
 
 
-    @DeleteMapping("/jobs/{id}")
+//    @DeleteMapping("/jobs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
         boolean deleted = jobService.deleteJobById(id);
         if (deleted) {
@@ -51,7 +56,8 @@ public class JobController {
         return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/jobs/{id}")
+//    @PutMapping("/jobs/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Job updateJob) {
         boolean updated = jobService.updateJob(id, updateJob);
         if(updated) {
