@@ -1,8 +1,18 @@
 package com.management.firstjobapp.job;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+// telling spring bot that this class will be used for the relational database
+@Entity
+/* @Table(name = "job_table")  if we don't want a table called job but job_table instead */
 public class Job {
 
-    // This are all the field when a Job is posted
+    @Id  /*Primary key */
+    @GeneratedValue(strategy = GenerationType.IDENTITY) /* ID managed by Entities */
     private Long id;
     private String title;
     private String description;
@@ -12,6 +22,10 @@ public class Job {
 
     // for all this field we generate a constructor and all getter and setter methods
     // we create only one constructor with all fields which means every company when post a job is mandatory for all fields
+
+    public Job() {
+        /*Default constructor is a mast for entities */
+    }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
