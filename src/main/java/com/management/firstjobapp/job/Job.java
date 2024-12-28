@@ -1,9 +1,7 @@
 package com.management.firstjobapp.job;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.management.firstjobapp.company.Company;
+import jakarta.persistence.*;
 
 
 // telling spring bot that this class will be used for the relational database
@@ -23,6 +21,9 @@ public class Job {
     // for all this field we generate a constructor and all getter and setter methods
     // we create only one constructor with all fields which means every company when post a job is mandatory for all fields
 
+    @ManyToOne
+    private Company company;
+
     public Job() {
         /*Default constructor is a mast for entities */
     }
@@ -36,6 +37,13 @@ public class Job {
         this.location = location;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
     // all getter  and setter methods
 
     public Long getId() {

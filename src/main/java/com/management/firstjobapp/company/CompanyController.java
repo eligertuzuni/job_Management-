@@ -26,7 +26,7 @@ public class CompanyController {
         companyService.updateCompany(company, id);
         return new ResponseEntity<>("Company updated successfully", HttpStatus.OK);
     }
-
+    @PostMapping
     public ResponseEntity<String> addCompany(@RequestBody Company company) {
         companyService.createCompany(company);
         return new ResponseEntity<>("Company added successfuly", HttpStatus.CREATED);
