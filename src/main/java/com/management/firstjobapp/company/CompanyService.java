@@ -1,4 +1,10 @@
 package com.management.firstjobapp.company;
 
-public class CompanyService {
+import java.util.List;
+
+public interface CompanyService {
+
+    List <Company> getAllCompanies();
+    boolean updateCompany(Company company, Long id);
+
 }
