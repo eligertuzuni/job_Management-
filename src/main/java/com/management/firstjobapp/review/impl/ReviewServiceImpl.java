@@ -52,4 +52,18 @@ public class ReviewServiceImpl implements ReviewService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @Override
+    public boolean updateReview(Long companyId, Long reviewId, Review updateReview) {
+        if (companyService.getCompanyById(companyId) != null) {
+            updateReview.setCompany(companyService.getCompanyById(companyId));
+            updateReview.setId(reviewId);
+            reviewRepository.save(updateReview);
+            return true;
+        }  else {
+            return false;
+        }
+    }
+
+
 }
