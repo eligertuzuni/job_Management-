@@ -8,4 +8,5 @@ public interface ReviewService {
     List<Review> getAllReviews(Long companyId);
     boolean addReview(Long companyId, Review review);
     ResponseEntity<Review> getReview(Long companyId, Long reviewId);
+    void updateReview();
 }
